@@ -36,7 +36,8 @@ Defines global site variables and parameters
 ini_set("auto_detect_line_endings",true);
 date_default_timezone_set("America/New_York");
 
-// Define database parameters
+// Define database parameters -- note that these are optional.
+// Data could be served from file or from database.
 $dbhost = "DATABASE_HOST";
 $dbuser = "DATABASE_USER";
 $dbpw = "DATABASE_PASSWORD";
