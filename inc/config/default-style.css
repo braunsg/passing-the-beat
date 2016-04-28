@@ -1,0 +1,461 @@
+/*
+
+passing-the-beat
+https://github.com/braunsg/passing-the-beat
+Created by: Steven Braun
+Last updated: 2016-04-28
+
+Open source code for "Passing the Beat," an interactive visualization of Billboard Top 100, 
+U.K. Top 200, and J-Wave Tokio Hot 100 crossover artists built with D3.js.
+
+This work is provided under the MIT License (MIT)
+COPYRIGHT (C) 2016 Steven Braun
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+
+A full copy of the license is included in LICENSE.md.
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// About this file
+
+CSS style definitions for the visualizations and presentation page
+
+*/
+
+@import url(https://fonts.googleapis.com/css?family=EB+Garamond);
+	
+body, html {
+	width: 100%;
+	height: 100%;
+	overflow: scroll;
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;	
+}
+
+/* SVG elements */
+
+.date_label {
+	font-family: Gill Sans, sans-serif;
+	font-size: 1.0em;
+	dominant-baseline: middle;
+	cursor: default;
+}
+
+.song_title_text {
+	font-family: Gill Sans,sans-serif;
+	font-size:1.0em;
+	cursor: default;
+	text-anchor: middle;
+}
+
+.artist_name_text {
+	text-anchor: start;
+	font-family: Gill Sans,sans-serif;
+	font-size:2.0em;
+	cursor: default;
+}
+
+.chart_name_label {
+	font-family: "Gill Sans";
+	font-weight: 600;
+	text-transform: uppercase;
+	font-variant: small-caps;
+	font-size: 0.8em;
+	alignment-baseline: middle;	
+	cursor: default;
+}
+
+.speed_label {
+	font-family: "Gill Sans";
+	font-weight: 200;
+	text-transform: uppercase;
+	font-variant: small-caps;
+	font-size: 0.8em;
+	alignment-baseline: middle;	
+	cursor: pointer;
+}
+
+.speed_label_selected {
+	font-weight:400;
+}
+
+/* Style for ranking axis in main visualization (1 - 100, represented by white gridlines */
+.rank_axis {
+	shape-rendering: crispEdges;
+}
+
+.rank_axis text {
+	font: 10px sans-serif; 
+	fill: #000;
+	cursor: default;
+}
+
+.rank_axis line,
+.rank_axis path {
+	fill: none;
+	stroke: none;
+}	
+	
+/* Styles for lines/axes representing top music charts in each country */
+.rankings_us {
+	stroke: #b3cde3;
+}
+
+.rankings_uk {
+	stroke: #ccebc5;
+}
+
+.rankings_jp {
+	stroke: #fbb4ae;
+}
+
+/* Styles for artist country origin */
+.artist_us {
+	fill: #377eb8;
+}
+
+.artist_uk {
+	fill: #4daf4a;
+}
+
+.artist_japan {
+	fill: #e41a1c;
+}
+
+.artist_unassigned {
+	fill: #000000;
+}
+
+.artist_deselect {
+	fill: #CECECE;
+	opacity: 0.05;
+}
+
+/* Styles for time axis in main visualization */
+.time_axis path,
+.time_axis line {
+	fill: none;
+	stroke: black;
+	shape-rendering: crispEdges;
+}
+
+.time_axis text {
+	font-family: Gill Sans, sans-serif;
+	font-size: 1.0em;
+	font-weight: 100;
+	cursor: default;
+}
+
+.animation_time_axis path,
+.animation_time_axis line {
+	fill: none;
+	stroke: #CCC;
+	shape-rendering: crispEdges;
+}
+
+.animation_time_axis text {
+	font-family: Gill Sans, sans-serif;
+	font-size: 1.0em;
+	font-weight: 100;
+	cursor: default;
+}
+
+/* Page structure */
+#wrapper {
+	width: 100%;
+	min-height: 600px;
+	height: 100vh;
+	overflow-x: hidden;
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+#header {
+	width: 100%;
+	margin: 0px;
+	padding: 25px;
+	flex: 0 0 auto;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	text-align: left;
+	border-bottom: 5px solid #EEE;
+	display: flex;
+	flex-direction: row;
+}
+
+#title_block {
+	flex: 1 1 auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.title {
+	font-family: Gill Sans, sans;
+	line-height:100%;
+	text-transform: lowercase;
+	font-weight: 100;
+	font-variant: small-caps;
+	font-size: 4.0em;
+	margin: 5px 0px 5px 0px;
+	padding: 0px;
+	flex: 1;
+	align-self: flex-start;
+	cursor: default;
+}
+
+.subtitle {
+	font-family: Gill Sans, sans;
+	line-height:100%;
+	font-weight: 100;
+	font-size: 1.4em;
+	margin: 5px 0px 20px 0px;
+	padding: 0px;
+	flex: 1;
+	align-self: flex-start;
+	cursor: default;
+}
+
+#navigation_block {
+	flex: 0 1 auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.navigation_item {
+	margin: 0px 25px 0px 25px;
+	padding: 0px;
+	flex: 0 1 auto;
+	font-family: Gill Sans, sans;
+	line-height:100%;
+	text-transform: lowercase;
+	font-weight: 100;
+	font-variant: small-caps;
+	font-size: 2.0em;
+}
+
+.navigation_item:hover {
+	border-bottom: 8px solid steelblue;
+}
+
+.navigation_item a:link,
+.navigation_item a:visited {
+	color: steelblue;
+	text-decoration: none;
+}
+
+#countries {
+	position: relative;
+	background: #F9F9F9;
+	margin: 0px;
+	padding: 0px;
+	flex: 0 0 auto;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.page_division {
+	flex: 0 0 auto;
+	flex-direction: row;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;		
+	margin: 0px;
+	padding: 25px;
+	font-family: Gill Sans, sans;
+	line-height:100%;
+	text-transform: lowercase;
+	font-weight: 400;
+	font-variant: small-caps;
+	font-size: 3.0em;
+	color: steelblue;
+	border-bottom: 2px solid #EEE;
+	border-top: 2px solid #EEE;
+}
+
+.section_header {
+	font-family: Gill Sans, sans;
+	line-height:100%;
+	text-transform: lowercase;
+	font-weight: 400;
+	font-variant: small-caps;
+	font-size: 2.0em;
+	margin: 5px 0px 20px 0px;
+}	
+
+.section_subheader {
+	font-family: Gill Sans, sans;
+	line-height:100%;
+	font-weight: 200;
+	font-style: italic;
+	font-size: 1.4em;
+	margin: 5px 0px 20px 0px;
+}	
+
+.content_row {
+	display: flex;
+	flex: 0 0 auto;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;	
+	margin-top: 25px;
+}
+
+.page_division + .content_row {
+	margin: 0px;
+}
+	
+.content_section {
+	flex: 1;
+	background: #F9F9F9;
+	padding: 25px;
+	margin: 0px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;		
+}
+
+.text_block {
+	width:100%;
+	font-family: EB Garamond, serif;
+	line-height:150%;
+	font-weight: 100;
+	font-size: 1.2em;
+	margin: 5px 0px 20px 0px;
+	text-align: justify;	
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;		
+}
+
+.text_block a:link,
+.text_block a:visited {
+	color: #CC3300;
+	text-decoration: none;
+}
+
+.text_block a:hover {
+	text-decoration: underline;
+}
+
+
+#artists {
+	flex: 0 0 auto;
+	background: #F9F9F9;
+	padding: 25px;
+	margin: 0px;
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	position: relative;	
+}
+
+#artist_select_wrapper {
+	display: flex;
+	flex-direction: row;
+	row-wrap: nowrap;
+}
+
+#artist_select {
+	flex: 0 1 25%;
+	min-width:25%;
+}
+
+#artist_svg_wrapper {
+	flex: 0 0 75%;
+	position: relative;
+}
+
+.input_artist_search {
+	width: 90%;
+	padding: 10px;
+	border: none;
+	transition: border 0.3s;
+	font-family: Gill Sans,sans-serif;
+	font-size:1.2em;
+	font-style: italic;
+	font-weight: 400;
+	border-bottom: solid 5px #ffcc66;
+	background: #EEEEEE;	
+	color: #999999;
+}
+
+
+/* Style for autocomplete search with individual artist history data */
+#autocomplete_container {
+	z-index: 500;
+	width: 200px;
+	max-height: 200px;
+	margin: 0px;
+	padding: 0px;
+	visibility: hidden;
+	position: absolute;
+	overflow-y: scroll;
+	top: 0px;
+	left: 0px;
+}
+
+.autocomplete_row {
+	margin: 0px;
+	padding: 5px;
+	display: block;
+	cursor: pointer;
+	font-family: Gill Sans, sans;
+	line-height:125%;
+	font-weight: 100;
+	font-size: 1.2em;
+	background: rgba(204,204,204,0.95);	
+}
+
+.autocomplete_row:hover {
+	background: steelblue;
+	color: #FFF;
+}
+
+/* Miscellaneous page elements */
+.loading {
+	position: relative;
+	left: 50%;
+	margin: -33px 0px 0px -33px;
+}
+
+.tooltip {	
+	position: absolute;			
+	text-align: left;			
+	padding: 5px;
+	font-family: Gill Sans, sans-serif;
+	font-size: 1.2em;				
+	background: rgba(255,255,255,0.9);
+	border: 0px;		
+	pointer-events: none;			
+}
+
+.key_image {
+	width:90%;
+	max-width: 1190px;
+	margin: 0px 0px 25px 0px;
+}
