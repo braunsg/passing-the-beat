@@ -5,7 +5,7 @@
 passing-the-beat
 https://github.com/braunsg/passing-the-beat
 Created by: Steven Braun
-Last updated: 2016-04-28
+Last updated: 2016-04-29
 
 Open source code for "Passing the Beat," an interactive visualization of Billboard Top 100, 
 U.K. Top 200, and J-Wave Tokio Hot 100 crossover artists built with D3.js.
@@ -32,18 +32,14 @@ Defines global site variables and parameters
 
 */
 
-// Define default PHP initialization parameters
-ini_set("auto_detect_line_endings",true);
-date_default_timezone_set("America/New_York");
+// For demonstration purposes, data for this visualization are loaded from file.
+// However, you might consider loading data from a database in real time -- 
+// define those database parameters here.
 
-// Define database parameters -- note that these are optional.
-// Data could be served from file or from database.
-$dbhost = "DATABASE_HOST";
-$dbuser = "DATABASE_USER";
-$dbpw = "DATABASE_PASSWORD";
-$dbname = "DATABASE_NAME";
+// Define default PHP initialization parameters
+date_default_timezone_set("America/New_York");
 
 // Define file paths
 $artist_data_path = "../data/artist-data/";
-$singles_data_path = "../data/singles-data/";
+
 ?>

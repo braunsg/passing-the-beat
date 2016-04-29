@@ -3,7 +3,7 @@
 passing-the-beat
 https://github.com/braunsg/passing-the-beat
 Created by: Steven Braun
-Last updated: 2016-04-28
+Last updated: 2016-04-29
 
 Open source code for "Passing the Beat," an interactive visualization of Billboard Top 100, 
 U.K. Top 200, and J-Wave Tokio Hot 100 crossover artists built with D3.js.
@@ -44,11 +44,13 @@ Index page initializing all visualizations and content
 	<!-- Load jQuery, D3 libraries -->
 	<script src="inc/lib/jquery-1.11.2.min.js"></script>
 	<script src="inc/lib/d3.v3.min.js"></script>
+	<script src="inc/lib/jquery.csv.min.js"></script>
+	
 	</script>
 	<link rel="stylesheet" type="text/css" href="inc/config/default-style.css">
 
 
-<script src="inc/lib/default-functions.js"></script>
+	<script src="inc/lib/default-functions.js"></script>
 </head>
 
 <body>

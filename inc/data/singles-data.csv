@@ -1,0 +1,6 @@
+msid,artist,artist_id,country_name,chart_from,chart,ranking,single_title,peak_position,peak_date,date
+ms008465,"The Beatles",77029,"United Kingdom",top100-uk,billboard-us,45,"I Want To Hold Your Hand",1,1964-02-01,1964-01-18
+ms007404,"Bee Gees",77323,Australia,billboard-us,top100-uk,31,"Tomorrow Tomorrow",23,1969-07-07,1969-06-09
+ms042107,Madonna,79702,"United States",jwave,jwave,36,"Hung Up",1,2005-11-13,2005-10-23
+ms043685,Beyonce,91577,"United States",billboard-us,jwave,48,"Single Ladies (Put A Ring On It)",1,2008-11-23,2008-11-02
+ms080776,Shakira,87279,Colombia,top100-uk,billboard-us,58,Empire,58,2014-04-12,2014-04-12

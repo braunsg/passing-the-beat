@@ -3,7 +3,7 @@
 passing-the-beat
 https://github.com/braunsg/passing-the-beat
 Created by: Steven Braun
-Last updated: 2016-04-28
+Last updated: 2016-04-29
 
 Open source code for "Passing the Beat," an interactive visualization of Billboard Top 100, 
 U.K. Top 200, and J-Wave Tokio Hot 100 crossover artists built with D3.js.
@@ -35,14 +35,14 @@ JavaScript functions used to create all visualizations and load content
 $(document).ready(function() {
 
 	//////// Declare some global variables
-	var data, dates;	// objects holding data and dates for main visualization
+	var data = {}, dates = [], artist_ids = {};	// objects holding data and dates for main visualization
 	var artist_svg;		// variable reference to SVG in artist history module
 	var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 	var tracker_paused, manual_pause, date_pointer, svg;
 	
 	var timer;
 	var animation_speed = 1;
-	var stop = false;		// For debugging and testing purposes
+	var animation_completed = false;		// For debugging and testing purposes
 	var artist_retrieved_name;
 	var autocomplete_top = $("input[name='artist']").position().top + $("input[name='artist']").outerHeight() + "px";
 	var autocomplete_left = $("input[name='artist']").position().left + "px";
@@ -61,45 +61,12 @@ $(document).ready(function() {
 		$("#autocomplete_container").css("visibility","hidden");
 	});
 	
-	$("input[name='artist']").on("input", function() {
-		var search = $(this).val();
-		if(search.length > 0) {
-			$("#autocomplete_container").css("visibility","visible");
-			$.getJSON("inc/data-analysis-scripts/artist_autocomplete.json", function(artist_search) {
-				var artist_matches = [];
-				artist_search.forEach(function(artist) {
-					var match_name = artist["artist_name"];
-					if(match_name.like('%' + search + '%')) {
-						artist_matches.push(artist);
-					}
-				});
-
-				var artist_match_string = "";
-				artist_matches.forEach(function(artist) {
-					artist_match_string += "<div class='autocomplete_row' id='" + artist["artist_id"] + "'>" + artist["artist_name"] + "</div>";
-				});
-				$("#autocomplete_container").html(artist_match_string);
-				$(".autocomplete_row").click(function() {
-					var result_content = $(this).text();
-					var artist_id = $(this).attr("id");
-					$("input[name='artist']").val(result_content);
-					artist_retrieved_name = result_content;
-					$.post("inc/content/fetch-artist-history.php",{search_name: result_content, artist_id: artist_id},function(artist_data) {
-						update_artist(JSON.parse(artist_data));
-					});
-				});
-			});
-		} else {
-			$("#autocomplete_container").css("visibility","hidden");
-		}
-	});
-	
 	
 	//////// Define events on page initialization	
 
 	// At page initialization, start artist history module
 	// using Beyonce as example
-		$.post("inc/content/fetch-artist-history.php",{artist_id: "91577"},function(artist_data) {
+	$.post("inc/content/fetch-artist-history.php",{artist_id: "91577"},function(artist_data) {
 		update_artist(JSON.parse(artist_data));
 	});
 
@@ -411,17 +378,71 @@ $(document).ready(function() {
 
 	} // end function update_artist()
 
-
+	// Get artist ID data from file
+	var get_artists = $.get("inc/data/artist_autocomplete.csv", function(return_artists) {
+		artist_ids = $.csv.toObjects(return_artists);
+	});
 	
-	// Generate main visualization
-	// Here, we're using a POST request because returned JSON is too big for $.getJSON
-	$.post("inc/content/generate-chart-data.php", null, function(return_data) {
+	// Get date keys from file
+	// Using jQuery CSV library:
+	// https://github.com/evanplaice/jquery-csv/
+	var get_dates = $.get("inc/data-analysis-scripts/dates.csv", function(return_dates) {
+		dates = $.csv.toArray(return_dates);		
+	});
 
-		return_data = jQuery.parseJSON(return_data);
+
+	// Get animation data from file
+	// Using jQuery CSV library:
+	// https://github.com/evanplaice/jquery-csv/
+	var get_data = $.get("inc/data-analysis-scripts/singles-data.csv", function(return_data) {
+		var raw_data = $.csv.toObjects(return_data);
+		raw_data.forEach(function(data_point) {
+			var this_date = data_point["date"];
+			if(!(this_date in data)) {
+				data[this_date] = [];
+			}
+			data[this_date].push(data_point);
+		});
+	});
+	
+	// Generate main visualization when artists, dates, and single data are all loaded
+	$.when(get_dates,get_data,get_artists).done(function() {
 		$(".loading").remove();
-		data = return_data["data"];
-		dates = return_data["dates"];
+		
+		// Bind artist history search to name input field and autocomplete
+		$("input[name='artist']").on("input", function() {
+			var search = $(this).val();
+			if(search.length > 0) {
+				$("#autocomplete_container").css("visibility","visible");
+				var artist_matches = [];
+				artist_ids.forEach(function(artist) {
+					var match_name = artist["artist_name"];
+					if(match_name.like('%' + search + '%')) {
+						artist_matches.push(artist);
+					}
+				});
 
+				var artist_match_string = "";
+				artist_matches.forEach(function(artist) {
+					artist_match_string += "<div class='autocomplete_row' id='" + artist["artist_id"] + "'>" + artist["artist_name"] + "</div>";
+				});
+				$("#autocomplete_container").html(artist_match_string);
+				$(".autocomplete_row").click(function() {
+					var result_content = $(this).text();
+					var artist_id = $(this).attr("id");
+					$("input[name='artist']").val(result_content);
+					artist_retrieved_name = result_content;
+					$.post("inc/content/fetch-artist-history.php",{search_name: result_content, artist_id: artist_id},function(artist_data) {
+						update_artist(JSON.parse(artist_data));
+					});
+				});
+			} else {
+				$("#autocomplete_container").css("visibility","hidden");
+			}
+		});
+		
+
+		// Proceed with variables for creating the main visualization
 		var width = $("#countries").innerWidth();
 		var height = $("#countries").innerHeight();
 		var margin = {top: 25, left: 250, right: 50, bottom: 25};
@@ -502,7 +523,7 @@ $(document).ready(function() {
 			.on("click", function() {
 				animation_tooltip.style("opacity",0);
 				peak_rank_tooltip.style("opacity",0);				
-				if(tracker_paused === true) {
+				if(tracker_paused == true) {
 					d3.select(this).classed("paused",false);
 					d3.select(this).classed("play",true);
 					tracker_paused = false;
@@ -515,7 +536,17 @@ $(document).ready(function() {
 					manual_pause = true;
 					d3.select(this).attr("xlink:href","inc/img/play.png");
 				}
-			});
+				
+				if(animation_completed == true) {
+					date_pointer = 0;
+					tracker_paused = false;
+					manual_pause = false;
+					d3.select(this).attr("xlink:href","inc/img/pause.png");
+					run(animation_speed,date_pointer,true);
+				}
+			})
+			.append("svg:title")
+				.text("Play/Pause");
 
 		svg.append("svg:image")
 			.attr("xlink:href","inc/img/replay.png")
@@ -531,7 +562,9 @@ $(document).ready(function() {
 				date_pointer = 0;
 				d3.select("#play_pause").attr("xlink:href","inc/img/pause.png");
 				run(animation_speed,date_pointer,true);
-			});
+			})
+			.append("svg:title")
+				.text("Start Over");
 
 		svg.append("text")
 			.attr("class","speed_label")
@@ -575,10 +608,11 @@ $(document).ready(function() {
 				
 			d3.select(element).classed("speed_label_selected",true);
 			tracker_paused = true;
-			animation_speed = 1;
-			animation(resume_animation_speed,date_pointer);
-			if(manual_pause == false) {
-				tracker_paused = false;			
+			if(animation_completed == false) {
+				animation(resume_animation_speed,date_pointer);
+				if(manual_pause == false) {
+					tracker_paused = false;			
+				}
 			}
 		}
 
@@ -729,6 +763,36 @@ $(document).ready(function() {
 			.selectAll("text")
 				.attr("dx", ".35em");
 
+		svg.attr("opacity",0.4);
+		var startplay = d3.select("#countries").append("div")
+			.attr("class","initial_start_text")
+			.html("<span style='alignment-baseline:middle;'>Play</span>")
+			.on("click", function() {
+				svg.attr("opacity",1);
+				d3.select(this).remove();
+				
+				//////////////////////////////////////////////////////////////////////////////
+				// RUN THE VISUALIZATION/ANIMATION
+				//////////////////////////////////////////////////////////////////////////////			
+
+				tracker_paused = false;
+				d3.select("#play_pause").attr("xlink:href","inc/img/pause.png");
+				run(animation_speed,date_pointer,false);
+				
+			});
+		
+
+		// Define functions for generating animation visualization below
+
+		function reset_animation() {
+				markers = {};
+				svg.selectAll(".cir_display").remove();
+				svg.selectAll(".distr_bar").remove();
+				date_pointer = 0;
+		}
+		
+		
+		
 		// Define the setInterval that will actually loop through the animation
 		function animation(animation_speed, resume_date_pointer) {
 
@@ -762,6 +826,11 @@ $(document).ready(function() {
 							.duration(500)
 							.attr("opacity",0)
 							.remove();
+						animation_completed = true;
+						d3.select("#play_pause").attr("xlink:href","inc/img/play.png");
+
+					} else {
+						animation_completed = false;
 					}
 
 					// Move the time pointer along the time scale
@@ -888,11 +957,18 @@ $(document).ready(function() {
 										var peak_rank = d.peak_position;
 										var position_top = Number(d3.select(this).attr("cy"));
 
+
+										var this_date = new Date(d.date);
+										var formatted_this_date = months[this_date.getMonth()] + " " + this_date.getDate() + ", " + this_date.getFullYear();
+										var peak_date = new Date(d.peak_date);
+										var formatted_peak_date = months[peak_date.getMonth()] + " " + peak_date.getDate() + ", " + peak_date.getFullYear();
+										
 										animation_tooltip.transition()		
 											.duration(200)		
 											.style("opacity", 0.9);		
 									
-										animation_tooltip.html(d.single_title + "<br><span style='font-size:0.8em;'>" + d.artist + " (" + d.date + ")</span>");
+										animation_tooltip.html(d.single_title + "<br><span style='font-size:0.8em;'>" + d.artist + " (" + formatted_this_date + ")</span>");
+										peak_rank_tooltip.html("<span style='font-size:0.8em; color:#660000'>Peak position #" + d.peak_position + " (" + formatted_peak_date + ")</span>");
 
 										// Position current ranking info tooltip at location of mouse hover,
 										// flipping the tooltip based on relative page position
@@ -917,16 +993,14 @@ $(document).ready(function() {
 										// Position peak ranking info tooltip at location of mouse hover,
 										// flipping the tooltip based on relative page position
 										if(peak_rank < 50) {
-											peak_rank_tooltip.html("<span style='font-size:0.8em; color:#660000'>Peak position #" + d.peak_position + " (" + d.peak_date + ")</span>")
-												.style("bottom", (height-position_top + 12) + "px")
+											peak_rank_tooltip.style("bottom", (height-position_top + 12) + "px")
 												.style("left", x_scale(peak_rank) + "px")
 												.style("right","auto")
 												.style("border-right","0px")
 												.style("border-left","2px solid #ffcc33");
 											
 										} else {
-											peak_rank_tooltip.html("<span style='font-size:0.8em; color:#660000'>Peak position #" + d.peak_position + " (" + d.peak_date + ")</span>")
-												.style("bottom", (height-position_top + 12) + "px")
+											peak_rank_tooltip.style("bottom", (height-position_top + 12) + "px")
 												.style("right", (width - x_scale(peak_rank)) + "px")
 												.style("left","auto")
 												.style("border-left","0px")
@@ -1016,10 +1090,7 @@ $(document).ready(function() {
 
 			// If animation is being replayed, remove all existing markers and start over
 			if(replay) {
-				markers = {};
-				svg.selectAll(".cir_display").remove();
-				svg.selectAll(".distr_bar").remove();
-				
+				reset_animation();				
 			}
 
 			// Create objects to hold data about distribution of ranking positions for each individual country chart
@@ -1131,11 +1202,6 @@ $(document).ready(function() {
 
 		} // end function run()
 
-		//////////////////////////////////////////////////////////////////////////////
-		// RUN THE VISUALIZATION/ANIMATION
-		//////////////////////////////////////////////////////////////////////////////			
-		
-		run(animation_speed,date_pointer,false);
 
 	}); // end $.post()
 }); // $(document).ready()

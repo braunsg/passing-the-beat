@@ -3,7 +3,7 @@
 passing-the-beat
 https://github.com/braunsg/passing-the-beat
 Created by: Steven Braun
-Last updated: 2016-04-28
+Last updated: 2016-04-29
 
 Open source code for "Passing the Beat," an interactive visualization of Billboard Top 100, 
 U.K. Top 200, and J-Wave Tokio Hot 100 crossover artists built with D3.js.
@@ -131,7 +131,7 @@ Data Analysis
 		<div class="section_header">About the Data and Analysis</div>
 		<div class="text_block">
 This visualization is built upon historical data for all single rankings on each chart (<a href="http://www.billboard.com/charts/hot-100" target="_blank">Billboard Top 100 Singles</a>, <a href="http://www.officialcharts.com/charts/singles-chart/" target="_blank">UK Top 200 Singles</a>, and <a href="http://www.j-wave.co.jp/original/tokiohot100/" target="_blank">J-Wave Tokio Hot 100</a>) over time between 1960 and 2016. For each chart, these data include song title, artist, record label, chart ranking, and ranking date. From these aggregated data, this visualization depicts <i>only</i> data about singles (and their artists) that have made appearances on <i>charts outside the home country of their artists</i>. Additionally, data for the U.K. Top 200 have been truncated to include only the top 100 ranking singles for each complete year.<br><br>
-Due to inconsistencies in some publishing standards in the music industry, some data may be excluded unintentionally from analysis. For example, data about singles by the group <i>Rolling Stones</i> and <i>The Rolling Stones</i> are aggregated separately in the overall analysis due to differences in how these bands (and others) may be signified on different record labels. For the purpose of this visualization, these errors are relatively negligible.<br><br>
+Due to inconsistencies in some publishing standards in the music industry, some data may be excluded unintentionally from analysis. For example, data about singles by the group <i>Rolling Stones</i> and <i>The Rolling Stones</i> are aggregated separately in the overall analysis due to differences in how these bands (and others) may be signified on different record labels. For similar reasons, there may also be some data about artist location (country) missing or seemingly inaccurate, for example when deciding whether an artist's country of origin should be defined as the country in which they live/were born versus where they actively produce their music. For the purpose of this visualization, these errors are relatively negligible.<br><br>
 All music ranking data for these charts were provided by <a href="http://www.academicrightspress.com/entertainment/music" target="_blank">Music Industry Data</a> (Music ID) from Academic Rights Press. Data about artist locations (<i>i.e.,</i> artist country of origin) were retrieved via the <a target="_blank" href="http://developer.echonest.com/docs/v4">EchoNest API</a>. The visualizations were created with <a target="_blank" href="http://d3js.org">D3.js</a>.<br><br>
 The full source code for this visualization is available <a target="_blank" href="https://github.com/braunsg/passing-the-beat">on GitHub</a>.
 		</div>
