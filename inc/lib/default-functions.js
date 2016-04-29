@@ -386,7 +386,7 @@ $(document).ready(function() {
 	// Get date keys from file
 	// Using jQuery CSV library:
 	// https://github.com/evanplaice/jquery-csv/
-	var get_dates = $.get("inc/data-analysis-scripts/dates.csv", function(return_dates) {
+	var get_dates = $.get("inc/data/dates.csv", function(return_dates) {
 		dates = $.csv.toArray(return_dates);		
 	});
 
@@ -394,7 +394,7 @@ $(document).ready(function() {
 	// Get animation data from file
 	// Using jQuery CSV library:
 	// https://github.com/evanplaice/jquery-csv/
-	var get_data = $.get("inc/data-analysis-scripts/singles-data.csv", function(return_data) {
+	var get_data = $.get("inc/data/singles-data.csv", function(return_data) {
 		var raw_data = $.csv.toObjects(return_data);
 		raw_data.forEach(function(data_point) {
 			var this_date = data_point["date"];
