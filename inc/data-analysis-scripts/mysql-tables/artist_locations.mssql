@@ -1,0 +1,111 @@
+/*
+
+passing-the-beat
+https://github.com/braunsg/passing-the-beat
+Created by: Steven Braun
+Last updated: 2016-04-29
+
+Open source code for "Passing the Beat," an interactive visualization of Billboard Top 100, 
+U.K. Top 200, and J-Wave Tokio Hot 100 crossover artists built with D3.js.
+
+This work is provided under the MIT License (MIT)
+COPYRIGHT (C) 2016 Steven Braun
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+
+A full copy of the license is included in LICENSE.md.
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// About this file
+
+Table holding data about artist locations (countries)
+
+*/
+
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Generation Time: Apr 29, 2016 at 06:45 PM
+-- Server version: 5.7.9
+-- PHP Version: 5.5.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `musicid`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `artist_locations`
+--
+
+CREATE TABLE `artist_locations` (
+  `artist_locations_rid` int(11) NOT NULL,
+  `artist_id` varchar(50) NOT NULL,
+  `artist_city` varchar(250) DEFAULT NULL,
+  `artist_region` varchar(250) DEFAULT NULL,
+  `artist_country` varchar(250) DEFAULT NULL,
+  `artist_location` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `artist_locations`
+--
+
+INSERT INTO `artist_locations` (`artist_locations_rid`, `artist_id`, `artist_city`, `artist_region`, `artist_country`, `artist_location`) VALUES
+(1, '79708', 'London', NULL, 'United Kingdom', 'London, UK'),
+(2, '79937', 'Birmingham', NULL, 'United Kingdom', 'Birmingham, England'),
+(3, '79970', 'Minneapolis', 'Minnesota', 'United States', 'Minneapolis, MN, US'),
+(4, '79741', 'Sheffield', 'England', 'United Kingdom', 'Sheffield, England, GB'),
+(5, '79863', NULL, 'New South Wales', 'Australia', 'New South Wales, AU'),
+(6, '77107', 'Hawthorne', 'California', 'United States', 'Hawthorne, CA, US'),
+(7, '79844', 'Sheffield', 'England', 'United Kingdom', 'Handsworth, Sheffield, England, GB'),
+(8, '79737', 'Boston', 'Massachusetts', 'United States', 'Roxbury, Boston, MA, US'),
+(9, '79965', 'Rockford', 'Illinois', 'United States', 'Rockford, IL, US'),
+(10, '79975', 'Melbourne', NULL, 'Australia', 'Melbourne, Australia'),
+(11, '79784', 'Sydney', 'New South Wales', 'Australia', 'Sydney, New South Wales, AU'),
+(12, '79758', 'Newark', 'NJ', 'United States', 'Newark, NJ'),
+(13, '78214', 'London', NULL, 'United Kingdom', 'London, England'),
+(14, '80154', 'Los Angeles', 'California', 'United States', 'Los Angeles, CA, US'),
+(15, '79715', 'Sayreville', 'NJ', 'United States', 'Sayreville, NJ');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `artist_locations`
+--
+ALTER TABLE `artist_locations`
+  ADD PRIMARY KEY (`artist_locations_rid`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `artist_locations`
+--
+ALTER TABLE `artist_locations`
+  MODIFY `artist_locations_rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26019;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

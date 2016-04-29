@@ -39,7 +39,8 @@ The directory inc/data-analysis-scripts includes samples of the PHP scripts used
 		A script that ingests into a MySQL database the raw historical chart data for the U.S. Billboard Top 100, U.K. Top 200, and J-Wave Tokio Hot 100 music charts
 		
 	map-single-ids.php
-		A script that goes through the raw data and maps potential song duplicates to single authority IDs. For example, songs that are released under multiple record labels across multiple countries may be misunderstood as distinct; here, those errors are reduced by finding matches between records based on single title plus artist name
+		A script that goes through the raw data and maps potential song duplicates to single authority IDs
+		For example, songs that are released under multiple record labels across multiple countries may be misunderstood as distinct; here, those errors are reduced by finding matches between records based on single title plus artist name
 		
 	echonest-retrieve-artist-location-genre.php
 		A script that uses the EchoNest API to retrieve data about locations/countries of origin for each unique artist presented in the visualizations

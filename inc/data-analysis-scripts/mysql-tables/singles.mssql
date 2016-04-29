@@ -1,0 +1,112 @@
+/*
+
+passing-the-beat
+https://github.com/braunsg/passing-the-beat
+Created by: Steven Braun
+Last updated: 2016-04-29
+
+Open source code for "Passing the Beat," an interactive visualization of Billboard Top 100, 
+U.K. Top 200, and J-Wave Tokio Hot 100 crossover artists built with D3.js.
+
+This work is provided under the MIT License (MIT)
+COPYRIGHT (C) 2016 Steven Braun
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+
+A full copy of the license is included in LICENSE.md.
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// About this file
+
+Table holding information about ALL singles across all three music charts -- song title, artist, etc
+
+*/
+
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Generation Time: Apr 29, 2016 at 06:46 PM
+-- Server version: 5.7.9
+-- PHP Version: 5.5.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `musicid`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `singles`
+--
+
+CREATE TABLE `singles` (
+  `singles_rid` int(11) NOT NULL COMMENT 'Record index for single',
+  `single_id` varchar(50) NOT NULL COMMENT 'Music ID database ID for single',
+  `single_title` varchar(250) NOT NULL COMMENT 'Title of single',
+  `artist_id` varchar(50) NOT NULL COMMENT 'Music ID database ID for artist',
+  `single_url` varchar(250) DEFAULT NULL COMMENT 'Music ID URL for single',
+  `single_label` varchar(150) DEFAULT NULL COMMENT 'Single recording label'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Holds data about singles';
+
+--
+-- Dumping data for table `singles`
+--
+
+INSERT INTO `singles` (`singles_rid`, `single_id`, `single_title`, `artist_id`, `single_url`, `single_label`) VALUES
+(28052, '236583', 'Here In My Heart', '76999', 'http://musicid.academicrightspress.com/releases/236583', ''),
+(28053, '236584', 'You Belong To Me', '77000', 'http://musicid.academicrightspress.com/releases/236584', ''),
+(28054, '236585', 'Somewhere Along The Way', '77001', 'http://musicid.academicrightspress.com/releases/236585', ''),
+(28055, '236586', 'The Isle Of Innisfree', '77002', 'http://musicid.academicrightspress.com/releases/236586', ''),
+(28056, '236587', 'Feet Up', '77003', 'http://musicid.academicrightspress.com/releases/236587', ''),
+(28057, '236588', 'Half As Much', '77004', 'http://musicid.academicrightspress.com/releases/236588', ''),
+(28058, '236589', 'Forget Me Not', '77005', 'http://musicid.academicrightspress.com/releases/236589', ''),
+(28059, '236590', 'High Noon (Do Not Forsake Me)', '77006', 'http://musicid.academicrightspress.com/releases/236590', ''),
+(28060, '236591', 'Sugarbush', '77007', 'http://musicid.academicrightspress.com/releases/236591', ''),
+(28061, '236592', 'Blue Tango', '77008', 'http://musicid.academicrightspress.com/releases/236592', ''),
+(28062, '236593', 'The Homing Waltz', '77005', 'http://musicid.academicrightspress.com/releases/236593', ''),
+(28063, '236594', 'Auf Wiedersehen Sweetheart', '77005', 'http://musicid.academicrightspress.com/releases/236594', ''),
+(28064, '236595', 'Because You''re Mine', '77009', 'http://musicid.academicrightspress.com/releases/236595', ''),
+(28065, '236596', 'Cowpuncher''s Cantata', '77010', 'http://musicid.academicrightspress.com/releases/236596', ''),
+(28066, '236597', 'Walking My Baby Back Home', '77011', 'http://musicid.academicrightspress.com/releases/236597', '');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `singles`
+--
+ALTER TABLE `singles`
+  ADD PRIMARY KEY (`single_id`),
+  ADD KEY `singles_rid` (`singles_rid`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `singles`
+--
+ALTER TABLE `singles`
+  MODIFY `singles_rid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Record index for single', AUTO_INCREMENT=86132;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,0 +1,112 @@
+/*
+
+passing-the-beat
+https://github.com/braunsg/passing-the-beat
+Created by: Steven Braun
+Last updated: 2016-04-29
+
+Open source code for "Passing the Beat," an interactive visualization of Billboard Top 100, 
+U.K. Top 200, and J-Wave Tokio Hot 100 crossover artists built with D3.js.
+
+This work is provided under the MIT License (MIT)
+COPYRIGHT (C) 2016 Steven Braun
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+
+A full copy of the license is included in LICENSE.md.
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// About this file
+
+Table holding information about unduplicated, aggregated, and mapped singles
+
+*/
+
+
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Apr 29, 2016 at 06:46 PM
+-- Server version: 5.7.9
+-- PHP Version: 5.5.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `musicid`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `single_mappings`
+--
+
+CREATE TABLE `single_mappings` (
+  `sm_rid` int(11) NOT NULL,
+  `single_id` varchar(50) NOT NULL COMMENT 'Single ID from ranking chart and singles table',
+  `msid` varchar(50) NOT NULL COMMENT 'Authority ID to which the single should be mapped',
+  `artist_id` varchar(50) NOT NULL COMMENT 'Artist ID of single'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Maps duplicate singles (i.e., multiple record labels) to authority IDs ';
+
+--
+-- Dumping data for table `single_mappings`
+--
+
+INSERT INTO `single_mappings` (`sm_rid`, `single_id`, `msid`, `artist_id`) VALUES
+(1, '244825', 'ms000001', '76999'),
+(2, '236583', 'ms000001', '76999'),
+(3, '236584', 'ms000002', '77000'),
+(4, '236585', 'ms000003', '77001'),
+(5, '236586', 'ms000004', '77002'),
+(6, '236587', 'ms000005', '77003'),
+(7, '236588', 'ms000006', '77004'),
+(8, '236589', 'ms000007', '77005'),
+(9, '236590', 'ms000008', '77006'),
+(10, '236591', 'ms000009', '77007'),
+(11, '236592', 'ms000010', '77008'),
+(12, '236593', 'ms000011', '77005'),
+(13, '236594', 'ms000012', '77005'),
+(14, '236595', 'ms000013', '77009'),
+(15, '236596', 'ms000014', '77010');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `single_mappings`
+--
+ALTER TABLE `single_mappings`
+  ADD PRIMARY KEY (`sm_rid`),
+  ADD KEY `sm_rid` (`sm_rid`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `single_mappings`
+--
+ALTER TABLE `single_mappings`
+  MODIFY `sm_rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86134;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

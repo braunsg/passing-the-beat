@@ -1,0 +1,120 @@
+/*
+
+passing-the-beat
+https://github.com/braunsg/passing-the-beat
+Created by: Steven Braun
+Last updated: 2016-04-29
+
+Open source code for "Passing the Beat," an interactive visualization of Billboard Top 100, 
+U.K. Top 200, and J-Wave Tokio Hot 100 crossover artists built with D3.js.
+
+This work is provided under the MIT License (MIT)
+COPYRIGHT (C) 2016 Steven Braun
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+
+A full copy of the license is included in LICENSE.md.
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// About this file
+
+Table holding data about artists -- names and IDs
+
+*/
+
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Generation Time: Apr 29, 2016 at 06:44 PM
+-- Server version: 5.7.9
+-- PHP Version: 5.5.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `musicid`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `artists`
+--
+
+CREATE TABLE `artists` (
+  `artists_rid` int(11) NOT NULL COMMENT 'Record index for artist',
+  `artist_id` varchar(50) NOT NULL COMMENT 'Music ID database ID for artist',
+  `artist_name` varchar(500) NOT NULL COMMENT 'Music ID artist name',
+  `artist_url` varchar(250) NOT NULL COMMENT 'Music ID artist URL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Holds data about artists';
+
+--
+-- Dumping data for table `artists`
+--
+
+INSERT INTO `artists` (`artists_rid`, `artist_id`, `artist_name`, `artist_url`) VALUES
+(19233, '100000', 'PHILLY STATION FT TAMMI WRIGHT', 'http://musicid.academicrightspress.com/artists/100000'),
+(20510, '100001', 'FAB', 'http://musicid.academicrightspress.com/artists/100001'),
+(17852, '100002', 'ONES', 'http://musicid.academicrightspress.com/artists/100002'),
+(16785, '100003', 'FRANCHINO', 'http://musicid.academicrightspress.com/artists/100003'),
+(20511, '100004', 'MANOO & FRANCOIS A', 'http://musicid.academicrightspress.com/artists/100004'),
+(19234, '100005', 'BRIAN AND TONY GOLD', 'http://musicid.academicrightspress.com/artists/100005'),
+(20512, '100006', 'BPM', 'http://musicid.academicrightspress.com/artists/100006'),
+(19235, '100007', 'GAZ BAND', 'http://musicid.academicrightspress.com/artists/100007'),
+(20513, '100008', 'MUD MEN', 'http://musicid.academicrightspress.com/artists/100008'),
+(19236, '100009', 'DON DIABLO', 'http://musicid.academicrightspress.com/artists/100009'),
+(20514, '100010', 'DOCTOR DICK', 'http://musicid.academicrightspress.com/artists/100010'),
+(19237, '100011', 'SOLAR FACTOR', 'http://musicid.academicrightspress.com/artists/100011'),
+(20515, '100012', 'PATRICK & EUGENE', 'http://musicid.academicrightspress.com/artists/100012'),
+(19238, '100013', 'NUDDLES', 'http://musicid.academicrightspress.com/artists/100013'),
+(20516, '100014', 'HYPER VS GENERAL MIDI', 'http://musicid.academicrightspress.com/artists/100014'),
+(19239, '100015', 'JUSTIN SULLIVAN', 'http://musicid.academicrightspress.com/artists/100015'),
+(17774, '100016', 'BENT', 'http://musicid.academicrightspress.com/artists/100016'),
+(20517, '100017', 'SUZANNA DEE', 'http://musicid.academicrightspress.com/artists/100017'),
+(17698, '100018', 'FINGATHING', 'http://musicid.academicrightspress.com/artists/100018'),
+(20518, '100019', 'RONAN KEATING AND LEANN RIMES', 'http://musicid.academicrightspress.com/artists/100019'),
+(18897, '100020', 'FORME', 'http://musicid.academicrightspress.com/artists/100020'),
+(17868, '100021', 'BARTHEZZ', 'http://musicid.academicrightspress.com/artists/100021'),
+(16542, '100022', 'MEEKER', 'http://musicid.academicrightspress.com/artists/100022'),
+(18861, '100023', 'DRAX & SCOTT MAC', 'http://musicid.academicrightspress.com/artists/100023'),
+(17837, '100024', 'EVE FT GWEN STEFANI', 'http://musicid.academicrightspress.com/artists/100024');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `artists`
+--
+ALTER TABLE `artists`
+  ADD PRIMARY KEY (`artist_id`),
+  ADD KEY `artists_rid` (`artists_rid`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `artists`
+--
+ALTER TABLE `artists`
+  MODIFY `artists_rid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Record index for artist', AUTO_INCREMENT=30676;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

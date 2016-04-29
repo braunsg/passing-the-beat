@@ -1,0 +1,115 @@
+/*
+
+passing-the-beat
+https://github.com/braunsg/passing-the-beat
+Created by: Steven Braun
+Last updated: 2016-04-29
+
+Open source code for "Passing the Beat," an interactive visualization of Billboard Top 100, 
+U.K. Top 200, and J-Wave Tokio Hot 100 crossover artists built with D3.js.
+
+This work is provided under the MIT License (MIT)
+COPYRIGHT (C) 2016 Steven Braun
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+
+A full copy of the license is included in LICENSE.md.
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// About this file
+
+Table holding data about crossover singles (that have already been unduplicated and mapped to authority IDs)
+
+*/
+
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Generation Time: Apr 29, 2016 at 06:45 PM
+-- Server version: 5.7.9
+-- PHP Version: 5.5.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `musicid`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mapped_crossovers`
+--
+
+CREATE TABLE `mapped_crossovers` (
+  `crossovers_rid` int(11) NOT NULL COMMENT 'Record index for crossover',
+  `msid` varchar(50) NOT NULL COMMENT 'Single ID from singles table',
+  `single_id` varchar(50) NOT NULL COMMENT 'Single ID of FIRST APPEARANCE ON OTHER COUNTRY CHART (not necessarily same as origin chart single_id)',
+  `artist_id` varchar(50) NOT NULL COMMENT 'Artist ID from artists table',
+  `chartname_from` varchar(50) NOT NULL COMMENT 'Origin chart',
+  `ranking_from` int(11) NOT NULL COMMENT 'Ranking of single in origin chart',
+  `chartname_to` varchar(50) NOT NULL COMMENT 'Destination chart',
+  `ranking_to` int(11) NOT NULL COMMENT 'Ranking of single in destination chart',
+  `crossover_date` date NOT NULL COMMENT 'Date of chart crossover'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Holds data about crossovers';
+
+--
+-- Dumping data for table `mapped_crossovers`
+--
+
+INSERT INTO `mapped_crossovers` (`crossovers_rid`, `msid`, `single_id`, `artist_id`, `chartname_from`, `ranking_from`, `chartname_to`, `ranking_to`, `crossover_date`) VALUES
+(1, 'ms000001', '244825', '76999', 'rankings_uk', 11, 'rankings_us', 99, '1961-07-24'),
+(2, 'ms000031', '236617', '77029', 'rankings_uk', 6, 'rankings_us', 22, '1964-12-05'),
+(3, 'ms000034', '236620', '77033', 'rankings_us', 31, 'rankings_uk', 29, '1960-03-08'),
+(4, 'ms000042', '236628', '77039', 'rankings_us', 2, 'rankings_uk', 26, '1961-12-26'),
+(5, 'ms000044', '236630', '77041', 'rankings_us', 11, 'rankings_uk', 38, '1962-11-13'),
+(6, 'ms000045', '236631', '77042', 'rankings_us', 1, 'rankings_uk', 37, '1964-01-07'),
+(7, 'ms000057', '251980', '77050', 'rankings_us', 2, 'rankings_uk', 27, '1962-01-09'),
+(8, 'ms000073', '236661', '77063', 'rankings_us', 4, 'rankings_uk', 34, '1961-12-26'),
+(9, 'ms000081', '236669', '77069', 'rankings_us', 78, 'rankings_uk', 12, '1960-03-08'),
+(10, 'ms000084', '236672', '77072', 'rankings_us', 56, 'rankings_uk', 197, '2011-12-11'),
+(11, 'ms000085', '236673', '77073', 'rankings_us', 8, 'rankings_uk', 26, '1962-01-09'),
+(12, 'ms000091', '236679', '77003', 'rankings_us', 4, 'rankings_uk', 26, '1959-11-26'),
+(13, 'ms000093', '236682', '77080', 'rankings_us', 10, 'rankings_uk', 39, '1961-01-17'),
+(14, 'ms000098', '236687', '77016', 'rankings_us', 2, 'rankings_uk', 26, '1962-11-27'),
+(15, 'ms000105', '236694', '77088', 'rankings_us', 56, 'rankings_uk', 20, '1959-12-03');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `mapped_crossovers`
+--
+ALTER TABLE `mapped_crossovers`
+  ADD UNIQUE KEY `single_id` (`msid`,`chartname_from`,`chartname_to`),
+  ADD KEY `crossovers_rid` (`crossovers_rid`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `mapped_crossovers`
+--
+ALTER TABLE `mapped_crossovers`
+  MODIFY `crossovers_rid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Record index for crossover', AUTO_INCREMENT=8534;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

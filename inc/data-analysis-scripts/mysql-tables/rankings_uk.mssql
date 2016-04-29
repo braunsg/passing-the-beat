@@ -1,0 +1,110 @@
+/*
+
+passing-the-beat
+https://github.com/braunsg/passing-the-beat
+Created by: Steven Braun
+Last updated: 2016-04-29
+
+Open source code for "Passing the Beat," an interactive visualization of Billboard Top 100, 
+U.K. Top 200, and J-Wave Tokio Hot 100 crossover artists built with D3.js.
+
+This work is provided under the MIT License (MIT)
+COPYRIGHT (C) 2016 Steven Braun
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+
+A full copy of the license is included in LICENSE.md.
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// About this file
+
+Table holding historical ranking data for U.K. Top 200
+
+*/
+
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Generation Time: Apr 29, 2016 at 06:45 PM
+-- Server version: 5.7.9
+-- PHP Version: 5.5.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `musicid`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rankings_uk`
+--
+
+CREATE TABLE `rankings_uk` (
+  `rankings_rid` int(11) NOT NULL COMMENT 'Record index for ranking',
+  `single_id` varchar(50) NOT NULL COMMENT 'ID of single from singles table',
+  `ranking_date` date NOT NULL COMMENT 'Date of ranking',
+  `ranking` int(11) NOT NULL COMMENT 'Ranking of single',
+  `chart_name` varchar(50) NOT NULL COMMENT 'Name of chart ("billboard-us","top100-uk","jwave")'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Holds data about single rankings';
+
+--
+-- Dumping data for table `rankings_uk`
+--
+
+INSERT INTO `rankings_uk` (`rankings_rid`, `single_id`, `ranking_date`, `ranking`, `chart_name`) VALUES
+(1, '236583', '1952-11-13', 1, 'top100-uk'),
+(2, '236584', '1952-11-13', 2, 'top100-uk'),
+(3, '236585', '1952-11-13', 3, 'top100-uk'),
+(4, '236586', '1952-11-13', 4, 'top100-uk'),
+(5, '236587', '1952-11-13', 5, 'top100-uk'),
+(6, '236588', '1952-11-13', 6, 'top100-uk'),
+(7, '236589', '1952-11-13', 7, 'top100-uk'),
+(8, '236590', '1952-11-13', 7, 'top100-uk'),
+(9, '236591', '1952-11-13', 8, 'top100-uk'),
+(10, '236592', '1952-11-13', 8, 'top100-uk'),
+(11, '236593', '1952-11-13', 9, 'top100-uk'),
+(12, '236594', '1952-11-13', 10, 'top100-uk'),
+(13, '236595', '1952-11-13', 11, 'top100-uk'),
+(14, '236596', '1952-11-13', 11, 'top100-uk'),
+(15, '236597', '1952-11-13', 12, 'top100-uk');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `rankings_uk`
+--
+ALTER TABLE `rankings_uk`
+  ADD KEY `rankings_rid` (`rankings_rid`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `rankings_uk`
+--
+ALTER TABLE `rankings_uk`
+  MODIFY `rankings_rid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Record index for ranking', AUTO_INCREMENT=303657;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
